@@ -4,14 +4,12 @@ function feed_defaults ($atts) {
         'total_posts' => 10,
         'number_of_each' => 10,
         'post_width' => 300,
+        'sort' => 'date',
 
         'twitter' => 'none',
         'rss' => 'none',
         'atube' => 'none',
         'qa' => 'none',
-
-        'atube_width' => '300',
-        'atube_height' => '300',
     ), $atts );
 }
 ?>

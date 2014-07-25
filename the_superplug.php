@@ -11,8 +11,9 @@ require_once('rss.php');
 require_once('twitter.php');
 
 require_once('defaults.php');
+require_once('feed_sort.php');
 
-require_once('page.php');
+require_once('sp_page.php');
 
 
 add_shortcode( 'recent_feed', 'recent_feed_controller' );
@@ -24,7 +25,7 @@ function recent_feed_controller($atts) {
     $items = [];
 
     if (!($twitter == 'none')) {
-        $tweets = get_twitter_items($twitter, $number_of_each);
+        $tweets = get_tweet_items($twitter, $number_of_each);
         $items = array_merge($items, $tweets);
     }
     if (!($rss == 'none')) {
@@ -40,17 +41,13 @@ function recent_feed_controller($atts) {
         $items = array_merge($items, $qas);
     }
 
-    usort($items, 'compare_date_keys');
+    $items = feed_sort($items, $sort);
 
-    echo '<br />';
-    echo 'SORT: <br />';
     start_page();
     foreach ($items as $item) {
         create_post($item);
     }
     end_page();
 }
-
-
 
 ?>

@@ -1,6 +1,12 @@
 <?php
+function atube_defaults($atts) {
+    return shortcode_atts( array(
+        'width' => 400,
+        'height' => 300,
+    ), $atts );
+}
+
 function get_atube_items ($number_of_each) {
-    echo 'working<br />';
     $dom = new DOMDocument();
     $xml = $dom->load("http://atube/latest.xml");
     $atubes = [];
@@ -37,4 +43,50 @@ function get_atube_items ($number_of_each) {
     }
     return $atubes;
 }
+
+function atube_title($item) {
+    extract($item['type_vals']);
+    link_title($link, $title);
+}
+
+function atube_icon($item) {
+    echo ' > ';
+}
+
+function atube_author_top() {
+    return TRUE;
+}
+
+function atube_content($item) {
+    extract($item['type_vals']);
+    extract(atube_defaults());
+    echo embedify($href, $width, $height);
+    echo '<br />';
+
+    more_button($href);
+}
+
+function atube_date($item) {
+    extract($item['type_vals']);
+    echo $date;
+}
+
+function atube_author($item) {
+    extract($item['type_vals']);
+    echo '<div class="hidden_button">';
+    echo '<a href="';
+    echo $href;
+    echo '">';
+    echo "<button class='feed_button'>more</button>";
+    echo '</a>';
+    echo '</div>';
+}
+
+function embedify($href, $width, $height) {
+        $str = '<iframe src="'.$href.'/embed_player" style="width: ';
+        $str = $str.$width.'px; height:'; 
+        $str = $str.$height.'px; border: 1px solid #BBBBBB;"></iframe>';
+        return $str;
+}
+
 ?>

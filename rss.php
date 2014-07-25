@@ -1,4 +1,13 @@
 <?php
+    
+function rss_defaults($atts) {
+    return shortcode_atts( array(
+        'chars' => 250,
+        'max_chars' => 500,
+        'roll' => 'yes',
+    ), $atts );
+}
+
 function get_rss_items ($rss, $number_of_each) {
     $feeds = explode(" ", $rss);
     $vals = [];
@@ -46,4 +55,105 @@ function get_rss_items ($rss, $number_of_each) {
     }
     return $vals;
 }
+
+function rss_title($item) {
+    extract($item['type_vals']);
+    link_title($link, $title);
+}
+
+function rss_icon($item) {
+     echo '<img class="icon" src="'.plugins_url('rss.png', __FILE__).'">';
+}
+
+function rss_author_top() {
+    return TRUE;
+}
+
+function rss_content($item) {
+    extract(rss_defaults());
+    extract($item['type_vals']);
+    $content = trim(strip_tags($content));
+    $content_len = strlen($content);
+    $total_len = $max_chars;
+    $prev_len = preview_length_handler($chars, $content_len);
+    $ext_len = $total_len - $prev_len;
+    $content_prev = content_prev_string_handler($content, $prev_len);
+    $content_end = content_end_string_handler($content, $prev_len, $ext_len);
+    $roll = activate_roll ($prev_len, $content_len, $roll, $ext_len);
+    if ($roll) {
+        echo '<div class="rss_content_long">';
+        echo $content_prev;
+        echo '<div class="ellipses"></div>';
+        echo '<span class="rss_content_ext';
+        extension_ellipses_handler ($total_len, $content_len);
+        echo '">';
+        echo $content_end;
+        echo '</span>';
+        echo '</div>';
+    } else {
+        echo '<div class="rss_content">';
+        echo $content_prev;
+        echo '</div>';
+    }
+    more_button($link);
+}
+
+function rss_date($item) {
+    echo $item['type_vals']['date'];
+}
+
+function rss_author($item) {
+    $rss = $item['type_vals'];
+    echo '<a class="author_link" ';
+    if ($rss['author_link']) {
+        echo 'href='.$rss['author_link'];
+    }
+    echo '>';
+    $author = $rss['author'];
+    $author = explode('/', $author)[0];
+    $author = explode('<', $author)[0];
+    echo trim(strip_tags($author));
+    echo '</a>';
+    if ($rss['category']) {
+        echo " | ";
+        echo $rss['category'];
+    }
+}
+
+//sets length of preview
+function preview_length_handler($chars, $content_len) {
+    $prev_len = $chars;
+    // if chars is set to full, make the preview the size of all of the content
+    if ($prev_len == 'full') {
+        $prev_len = $content_len;
+    }
+    return $prev_len;
+}
+
+// creates content string to proper size
+function content_end_string_handler($content, $prev_len, $ext_len) {
+    $content_end = substr($content, $prev_len, $ext_len);
+    // if max_chars is full, then make the end the rest of the length
+    if ($total_len == 'full') {
+        $content_end = substr($content, $prev_len);
+    }
+    return $content_end;
+}
+
+function content_prev_string_handler($content, $prev_len) {
+    return substr($content, 0, $prev_len);
+}
+
+// activates rolldown if true
+function activate_roll ($prev_len, $content_len, $roll, $ext_len) {
+    return $prev_len != "full" && $prev_len < $content_len && $roll == 'yes' && $ext_len > 0;
+}
+
+// adds the ellipses class if true
+function extension_ellipses_handler ($total_len, $content_len) {
+    if ($total_len < $content_len) {
+        echo ', ellipses_ext';
+    }
+}
+
 ?>

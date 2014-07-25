@@ -1,6 +1,6 @@
 <?php
-function get_twitter_items ($twitter, $number_of_each) {
-    echo 'working';
+    
+function get_tweet_items ($twitter, $number_of_each) {
     $users = explode(" ", $twitter);
     $tweets = [];
     foreach($users as $user) {
@@ -45,6 +45,59 @@ function get_twitter_items ($twitter, $number_of_each) {
         }
     }
     return $tweets;
+}
+
+function tweet_icon($item) {
+     echo ' > ';
+}
+
+function tweet_author_top() {
+    return FALSE;
+}
+
+function tweet_title($item) {
+    //echo $item['type_vals']['content'];
+    $tweet = $item['type_vals'];
+    echo '<a class="title_link_text" href="'.$tweet['link'].'">';
+    $hashtag = '\1</a><a class="author_link" href="http://twitter.com/search?q=%23\2">#\2</a><a class="title_link_text" href="'.$tweet['link'].'">';
+    $handle = '\1</a><a class="author_link" href="http://twitter.com/\2">@\2</a><a class="title_link_text" href="'.$tweet['link'].'">';
+    $content = $tweet['content'];
+    $content = preg_replace('/(^|\s)#(\w*[a-zA-Z_]+\w*)/', $hashtag, $content);
+    $content = preg_replace('/(^|\s)@(\w*[a-zA-Z_]+\w*)/', $handle, $content);
+    echo $content;
+    echo '</a>';
+}
+
+function tweet_content($item) {
+
+}
+
+function tweet_date($item) {
+    extract($item['type_vals']);
+    echo $item['type_vals']['date'];
+}
+
+function tweet_author($item) {
+    $tweet = $item['type_vals'];
+    
+    echo '<div class="hidden_button">';
+    echo '<a href="https://twitter.com/intent/follow?screen_name=';
+    echo $tweet['user'];
+    echo '">';
+    echo "<button class='feed_button'><img class='twitter_icon' src='".plugins_url('twitter-256.png', __FILE__)."'></img>follow</button>";
+    echo '</a>';
+    echo " ";
+    echo '<a href="https://twitter.com/intent/retweet?tweet_id=';
+    echo $tweet['id'];
+    echo '">';
+    echo "<button class='feed_button'><img class='twitter_icon' src='".plugins_url('icon-retweet-white.png', __FILE__)."'></img>retweet</button>";
+    echo '</a>';
+    echo '<script src="https://platform.twitter.com/widgets.js"></script>';
+    echo '</div>';
+
+    echo "<a class='author_link' href='".$tweet['tag']."'>";
+    echo "@".$tweet['user'];
+    echo "</a>";
 }
 
 ?>
