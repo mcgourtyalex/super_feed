@@ -1,5 +1,6 @@
 <?php
 
+
 $default_args = array(
         'total_posts' => 10,
         'number_of_each' => 10,
@@ -7,15 +8,14 @@ $default_args = array(
         'sort' => 'date',
     );
 
-$registered_feeds = array ();
+$registered_feeds = [];
 
 function register_defaults ($default, $default_val) {
     $GLOBALS['default_args'][$default] = $default_val;
-    array_push($registered_feeds, $default);
+    array_push($GLOBALS['registered_feeds'], $default);
 }
 
 function feed_defaults ($atts) {
-    
     return shortcode_atts($GLOBALS['default_args'] , $atts );
 }
 ?>

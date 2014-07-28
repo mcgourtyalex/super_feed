@@ -1,20 +1,28 @@
 <?php
 
-function get_text_items ($number_of_each) {
-    $qa = [];
-    $qa[0] = [
+// USE THIS TEMPLATE TO ADD FEEDS TO THE AGGREGATOR. 
+// ADD STYLES INTO FEED_STYLES.CSS
+// REGISTER THE FEED IN 'the_superplug.php' AND BE SURE THE SLUG YOU USE MATCHES THE SLUG YOU USE HERE.
+// BE SURE THAT THE NAME OF EACH FUNCTION FOLLOWS THE FOLLOWING FORMAT, WITH 'text' REPLACED WITH YOUR FEED'S SLUG.
+// EX get_<your slug name here>_items and <your slug name here>_title
+
+function get_text_items ($atts, $number_of_each) {
+    // create items to return
+    $items = [];
+    // add at least one item with this base format:
+    $items[0] = [
         'type' => 'text', 
         'date_key' => time(), 
         'type_vals' => [
-            'title' => 'custom', 
-            'date' => "", 
-            'content' => "HEY!",
+            'title' => 'title', 
+            'date' => time(), 
+            'content' => "content",
             'link' => "http://google.com",
-            'heat' => "",
-            'id' => "",
         ],
     ];
-    return $qa;
+
+    // return the items
+    return $items;
 }
 
 function text_title($item) {

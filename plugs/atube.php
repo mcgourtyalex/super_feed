@@ -6,7 +6,7 @@ function atube_defaults($atts) {
     ), $atts );
 }
 
-function get_atube_items ($number_of_each) {
+function get_atube_items ($atts, $number_of_each) {
     $dom = new DOMDocument();
     $xml = $dom->load("http://atube/latest.xml");
     $atubes = [];

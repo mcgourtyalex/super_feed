@@ -1,6 +1,6 @@
 <?php
 
-function get_qa_items ($number_of_each) {
+function get_qa_items ($atts, $number_of_each) {
     require_once('C:\Users\t_mcgoa\Documents\My Web Sites\wordpress1\qa\qa-include\qa-base.php');
     $prefix = constant('QA_MYSQL_TABLE_PREFIX'); 
 

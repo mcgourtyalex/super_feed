@@ -30,10 +30,6 @@ function create_post($item) {
         echo '</div>';
     }
     echo '</div>';
-    
-
-    echo '<div class="buffer">';
-    echo '</div>';
 }
 
 function more_button ($link) {
