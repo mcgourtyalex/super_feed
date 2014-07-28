@@ -1,5 +1,5 @@
 <?php
-    
+
 function get_qa_items ($number_of_each) {
     require_once('C:\Users\t_mcgoa\Documents\My Web Sites\wordpress1\qa\qa-include\qa-base.php');
     $prefix = constant('QA_MYSQL_TABLE_PREFIX'); 
@@ -50,7 +50,7 @@ function qa_title($item) {
 }
 
 function qa_icon($item) {
-     echo ' > ';
+     echo " > ";
 }
 
 function qa_author_top() {

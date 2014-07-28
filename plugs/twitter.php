@@ -1,5 +1,5 @@
 <?php
-    
+
 function get_tweet_items ($twitter, $number_of_each) {
     $users = explode(" ", $twitter);
     $tweets = [];
