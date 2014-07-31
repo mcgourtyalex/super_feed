@@ -1,7 +1,10 @@
 <?php
 
 function get_qa_items ($atts, $number_of_each) {
-    require_once('C:\Users\t_mcgoa\Documents\My Web Sites\wordpress1\qa\qa-include\qa-base.php');
+    
+    $QA_DIRECTORY = ABSPATH.'\qa\qa-include\qa-base.php';
+
+    require_once($QA_DIRECTORY);
     $prefix = constant('QA_MYSQL_TABLE_PREFIX'); 
 
     $limit = $number_of_each;
@@ -50,7 +53,21 @@ function qa_title($item) {
 }
 
 function qa_icon($item) {
-     echo " > ";
+     echo '<svg class="icon" viewBox="0 0 16 16" enable-background="new 0 0 16 16">
+		<path class="fill" fill="#999999" d="M4.1,9.4c0.3,0,0.5,0,0.8,0c0,1.4,0,2.7,0,4.1c2.1,0,4.1,0,6.2,0c0-1.4,0-2.7,0-4.1c0.3,0,0.5,0,0.8,0
+			c0,1.6,0,3.3,0,4.9c-2.6,0-5.2,0-7.8,0C4.1,12.7,4.1,11.1,4.1,9.4z"/>
+		<path class="fill" fill="#999999" d="M11.3,7.9c-0.2,0.3-0.4,0.6-0.5,0.9C9.4,8,8.1,7.2,6.7,6.4C6.9,6.1,7,5.8,7.2,5.5
+			C8.6,6.3,9.9,7.1,11.3,7.9z"/>
+		<path class="fill" fill="#999999" d="M10.4,10.4c0,0.4-0.1,0.7-0.1,1c-1.6-0.1-3.1-0.3-4.7-0.4c0-0.3,0-0.7,0.1-1C7.2,10.1,8.8,10.3,10.4,10.4z
+			"/>
+		<path class="fill" fill="#999999" d="M8.8,3.9c0.3-0.2,0.6-0.4,0.9-0.6c0.9,1.3,1.8,2.6,2.7,3.9c-0.3,0.2-0.6,0.4-0.9,0.6
+			C10.6,6.5,9.7,5.2,8.8,3.9z"/>
+		<path class="fill" fill="#999999" d="M11.7,2.5c0.4-0.1,0.7-0.1,1-0.2C13,3.9,13.2,5.4,13.5,7c-0.3,0.1-0.6,0.1-1,0.2
+			C12.2,5.6,11.9,4.1,11.7,2.5z"/>
+		<path class="fill" fill="#999999" d="M6.1,7.9c1.6,0.4,3.1,0.8,4.6,1.2c-0.1,0.3-0.1,0.6-0.2,1C8.9,9.7,7.4,9.3,5.8,8.9C5.9,8.5,6,8.2,6.1,7.9z
+			"/>
+		<path fill="#999999" d="M5.5,12.7c0-0.3,0-0.6,0-1c1.6,0,3.1,0,4.7,0c0,0.3,0,0.6,0,1C8.7,12.7,7.1,12.7,5.5,12.7z"/>
+</svg>';
 }
 
 function qa_author_top() {

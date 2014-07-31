@@ -103,12 +103,23 @@ div.hidden_button {
     margin-bottom: 0px;
 }
 div.icon {
-    display: inline;
+    display: inline-block;
 }
-img.icon {
-    width: 16px;
-    height: 16px;
+svg.icon {
+    width: 20px;
+    height: 20px;
     margin-right: 5px;
+    display: inline-block;
+}
+.fill {
+    fill: #999999;
+    stroke: 1px;
+}
+.fill:hover {
+    fill: #555555;
+}
+svg.icon:hover .fill {
+    fill: #555555;
 }
 
 

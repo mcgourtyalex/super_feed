@@ -62,7 +62,11 @@ function rss_title($item) {
 }
 
 function rss_icon($item) {
-     echo '<img class="icon" src="'.plugins_url('rss.png', __FILE__).'">';
+     echo '<svg class="icon" viewBox="0 0 16 16" enable-background="new 0 0 16 16">
+        <path class="fill" d="M13.5,11.1c-0.5,0-1,0-1.5,0c-0.1-1.9-0.7-3.5-2-4.8c-1.3-1.3-2.9-2-4.8-2c0-0.5,0-1,0-1.5C9.3,2.4,13.7,6.5,13.5,11.1z"/>
+		<path class="fill" d="M10.6,11.1c-0.5,0-1,0-1.5,0c-0.3-2.4-1.6-3.7-4-4c0-0.5,0-1,0-1.5C7.8,5.4,10.7,8,10.6,11.1z"/>
+		<path class="fill" d="M6.1,11.1C5.5,11.1,5,10.7,5,10c0-0.7,0.5-1.1,1.1-1.1c0.6,0,1.1,0.5,1.1,1.1C7.2,10.6,6.8,11.1,6.1,11.1z"/>
+        </svg>';
 }
 
 function rss_author_top() {

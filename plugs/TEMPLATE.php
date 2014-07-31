@@ -41,8 +41,14 @@ function text_author_top() {
 function text_content($item) {
     extract($item['type_vals']);
     echo $content;
+    echo '<svg width="600" height="400">';
+    for ($i = 0; $i < 60; $i++) {
+        echo '<rect class="fill" x="'.($i*10+2).'" y="'.(350 - abs(sin($i*8/31.4)*100)).'" width="8px" height="'.(abs(sin($i*8/31.4)*100)).'" />';
+        echo '<rect class="fill" x="'.($i*10+2).'" y="'.(0).'" width="8px" height="'.(abs(cos($i*8/31.4)*100)).'" />';
+    }
+    echo '</svg>';
+
     echo '<br />';
-    
     more_button($link);
 }
 

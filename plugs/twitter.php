@@ -48,7 +48,12 @@ function get_tweet_items ($twitter, $number_of_each) {
 }
 
 function tweet_icon($item) {
-     echo ' > ';
+    echo '<svg class="icon" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+        <path class="fill" d="M3.2,11.2c1.1,0.1,2-0.2,2.9-0.8c-0.9-0.1-1.5-0.6-1.9-1.4c0.3,0,0.5,0,0.8,0c-1-0.5-1.6-1.3-1.5-2C3.8,7,4,7,4.3,7.1
+			        c-0.9-1-1.1-1.9-0.6-2.8c1.1,1.3,2.5,2,4.2,2.1c0-0.2,0-0.4,0-0.6C8,5.1,8.4,4.5,9.2,4.1c0.8-0.3,1.5-0.2,2.1,0.3
+			        c0.1,0.1,0.3,0.2,0.4,0.1c0.3-0.1,0.7-0.3,1-0.4C12.6,4.6,12.4,5,12,5.3c0.3-0.1,0.6-0.2,1-0.3c-0.2,0.4-0.5,0.6-0.8,0.9
+			        C12.1,6,12,6.1,12,6.3c0,2.3-1.6,5.1-4.7,5.7c-1.4,0.2-2.7,0-4-0.6C3.3,11.3,3.2,11.3,3.2,11.2C3.1,11.2,3.2,11.2,3.2,11.2z"/>
+        </svg>';
 }
 
 function tweet_author_top() {
@@ -84,13 +89,13 @@ function tweet_author($item) {
     echo '<a href="https://twitter.com/intent/follow?screen_name=';
     echo $tweet['user'];
     echo '">';
-    echo "<button class='feed_button'><img class='twitter_icon' src='".plugins_url('twitter-256.png', __FILE__)."'></img>follow</button>";
+    echo "<button class='feed_button'><img class='twitter_icon' src='".plugins_url('imgs/twitter-256.png', __FILE__)."'></img>follow</button>";
     echo '</a>';
     echo " ";
     echo '<a href="https://twitter.com/intent/retweet?tweet_id=';
     echo $tweet['id'];
     echo '">';
-    echo "<button class='feed_button'><img class='twitter_icon' src='".plugins_url('icon-retweet-white.png', __FILE__)."'></img>retweet</button>";
+    echo "<button class='feed_button'><img class='twitter_icon' src='".plugins_url('imgs/icon-retweet-white.png', __FILE__)."'></img>retweet</button>";
     echo '</a>';
     echo '<script src="https://platform.twitter.com/widgets.js"></script>';
     echo '</div>';
