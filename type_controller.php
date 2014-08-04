@@ -1,7 +1,7 @@
 <?php
-function content_type ($item, $spot) {
+function content_type ($item, $spot, $atts) {
     $type = $item['type'];
-    call_user_func($type."_".$spot, $item);
+    call_user_func($type."_".$spot, $item, $atts);
 }
 
 function author_top ($item) {

@@ -1,14 +1,17 @@
 <?php
     
-function rss_defaults($atts) {
-    return shortcode_atts( array(
+$rss_defaults = array(
         'chars' => 250,
         'max_chars' => 500,
         'roll' => 'yes',
-    ), $atts );
+);
+
+function rss_defaults() {
+    return $GLOBALS['rss_defaults'];
 }
 
-function get_rss_items ($rss, $number_of_each) {
+function get_rss_items ($atts) {
+    extract($atts);
     $feeds = explode(" ", $rss);
     $vals = [];
     foreach ($feeds as $feed) {
@@ -73,8 +76,8 @@ function rss_author_top() {
     return TRUE;
 }
 
-function rss_content($item) {
-    extract(rss_defaults());
+function rss_content($item, $atts) {
+    extract($atts);
     extract($item['type_vals']);
     $content = trim(strip_tags($content));
     $content_len = strlen($content);
@@ -103,7 +106,8 @@ function rss_content($item) {
 }
 
 function rss_date($item) {
-    echo $item['type_vals']['date'];
+    extract($item['type_vals']);
+    echo format_date($date);
 }
 
 function rss_author($item) {

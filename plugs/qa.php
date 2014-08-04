@@ -1,12 +1,19 @@
 <?php
 
-function get_qa_items ($atts, $number_of_each) {
+$qa_defaults = array(
+    'directory' => ABSPATH.'\qa\qa-include\qa-base.php',
+);
+
+function qa_defaults() {
+    return $GLOBALS['qa_defaults'];
+}
+
+function get_qa_items ($atts) {
     
-    $QA_DIRECTORY = ABSPATH.'\qa\qa-include\qa-base.php';
+    extract($atts);
 
-    require_once($QA_DIRECTORY);
+    require_once($directory);
     $prefix = constant('QA_MYSQL_TABLE_PREFIX'); 
-
     $limit = $number_of_each;
     $query = qa_db_query_sub("
         SELECT * FROM ".$prefix."posts 
@@ -83,8 +90,8 @@ function qa_content($item) {
 }
 
 function qa_date($item) {
-    $qa = $item['type_vals'];
-    echo $qa['date'];
+    extract($item['type_vals']);
+    echo format_date($date);
 }
 
 function qa_author($item) {

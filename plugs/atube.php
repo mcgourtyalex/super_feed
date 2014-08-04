@@ -1,12 +1,16 @@
 <?php
-function atube_defaults($atts) {
-    return shortcode_atts( array(
-        'width' => 400,
-        'height' => 300,
-    ), $atts );
+
+$atube_defaults = array(
+    'atube_width' => 400,
+    'atube_height' => 300,
+);
+
+function atube_defaults() {
+    return $GLOBALS['atube_defaults'];
 }
 
-function get_atube_items ($atts, $number_of_each) {
+function get_atube_items ($atts) {
+    extract($atts);
     $dom = new DOMDocument();
     $xml = $dom->load("http://atube/latest.xml");
     $atubes = [];
@@ -73,7 +77,7 @@ function atube_author_top() {
 function atube_content($item) {
     extract($item['type_vals']);
     extract(atube_defaults());
-    echo embedify($href, $width, $height);
+    echo embedify($href, $atube_width, $atube_height);
     echo '<br />';
 
     more_button($href);
@@ -81,7 +85,7 @@ function atube_content($item) {
 
 function atube_date($item) {
     extract($item['type_vals']);
-    echo $date;
+    echo format_date($date);
 }
 
 function atube_author($item) {

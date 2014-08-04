@@ -1,23 +1,44 @@
 <?php
 
-// USE THIS TEMPLATE TO ADD FEEDS TO THE AGGREGATOR. 
-// ADD STYLES INTO FEED_STYLES.CSS
-// REGISTER THE FEED IN 'the_superplug.php' AND BE SURE THE SLUG YOU USE MATCHES THE SLUG YOU USE HERE.
-// BE SURE THAT THE NAME OF EACH FUNCTION FOLLOWS THE FOLLOWING FORMAT, WITH 'text' REPLACED WITH YOUR FEED'S SLUG.
-// EX get_<your slug name here>_items and <your slug name here>_title
+/*  
+    USE THIS TEMPLATE TO ADD FEEDS TO THE AGGREGATOR.
 
-function get_text_items ($atts, $number_of_each) {
+    REGISTER THE FEED IN 'the_superplug.php' IN THE FOLLOWING FORMAT:
+        register_defaults ('<your slug>', 'none', $<your slug>_defaults);
+    AND BE SURE THE SLUG YOU USE MATCHES THE SLUG YOU USE HERE.
+
+    BE SURE THAT THE NAME OF EACH FUNCTION & GLOBAL VAR FOLLOWS THIS FORMAT, WITH 'template' REPLACED WITH YOUR FEED'S SLUG.
+    EX get_<your slug>_items and <your slug>_title and <your slug>_defaults.
+
+    USE ECHO AND NOT RETURN TO ADD ELEMENTS TO EACH POST
+
+    ADD STYLES INTO FEED_STYLES.CSS TO STYLE THE PLUG.
+*/
+
+// (1)
+$template_defaults = array(
+        'custom_setting' => 'content',
+);
+
+// (2)
+function template_defaults() {
+    return $GLOBALS['template_defaults'];
+}
+
+// (3)
+function get_template_items ($item, $atts) {
     // create items to return
     $items = [];
+
     // add at least one item with this base format:
     $items[0] = [
-        'type' => 'text', 
+        'type' => 'template', 
         'date_key' => time(), 
         'type_vals' => [
             'title' => 'title', 
             'date' => time(), 
             'content' => "content",
-            'link' => "http://google.com",
+            'link' => "#",
         ],
     ];
 
@@ -25,47 +46,40 @@ function get_text_items ($atts, $number_of_each) {
     return $items;
 }
 
-function text_title($item) {
+// (4)
+function template_title($item, $atts) {
     extract($item['type_vals']);
     link_title($link, $title);
 }
 
-function text_icon($item) {
-     echo " > ";
+// (5)
+function template_icon($item, $atts) {
+     echo "icon ";
 }
 
-function text_author_top() {
+// (6)
+function template_author_top($item, $atts) {
     return TRUE;
 }
 
-function text_content($item) {
+// (7)
+function template_content($item, $atts) {
     extract($item['type_vals']);
-    echo $content;
-    echo '<svg width="600" height="400">';
-    for ($i = 0; $i < 60; $i++) {
-        echo '<rect class="fill" x="'.($i*10+2).'" y="'.(350 - abs(sin($i*8/31.4)*100)).'" width="8px" height="'.(abs(sin($i*8/31.4)*100)).'" />';
-        echo '<rect class="fill" x="'.($i*10+2).'" y="'.(0).'" width="8px" height="'.(abs(cos($i*8/31.4)*100)).'" />';
-    }
-    echo '</svg>';
-
-    echo '<br />';
+    extract($atts);
+    echo $custom_setting;
     more_button($link);
 }
 
-function text_date($item) {
+// (8)
+function template_date($item, $atts) {
     $qa = $item['type_vals'];
     echo $qa['date'];
 }
 
-function text_author($item) {
+// (9)
+function template_author($item, $atts) {
     extract($item['type_vals']);
-    echo '<div class="hidden_button">';
-    echo '<a href="';
-    echo $link;
-    echo '">';
-    echo "<button class='feed_button'>more</button>";
-    echo '</a>';
-    echo '</div>';
+    more_button($link);
 }
 
 ?>

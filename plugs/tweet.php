@@ -1,6 +1,8 @@
 <?php
 
-function get_tweet_items ($twitter, $number_of_each) {
+function get_tweet_items ($atts) {
+    extract($atts);
+    $twitter = $atts['tweet'];
     $users = explode(" ", $twitter);
     $tweets = [];
     foreach($users as $user) {
@@ -31,7 +33,7 @@ function get_tweet_items ($twitter, $number_of_each) {
                     'type_vals' => [
                         'user' => $user, 
                         'date' => $date, 
-                        'content' => $content,
+                        'title' => $content,
                         'link' => $link,
                         'tag' => $tag,
                         'id' => $id,
@@ -66,7 +68,7 @@ function tweet_title($item) {
     echo '<a class="title_link_text" href="'.$tweet['link'].'">';
     $hashtag = '\1</a><a class="author_link" href="http://twitter.com/search?q=%23\2">#\2</a><a class="title_link_text" href="'.$tweet['link'].'">';
     $handle = '\1</a><a class="author_link" href="http://twitter.com/\2">@\2</a><a class="title_link_text" href="'.$tweet['link'].'">';
-    $content = $tweet['content'];
+    $content = $tweet['title'];
     $content = preg_replace('/(^|\s)#(\w*[a-zA-Z_]+\w*)/', $hashtag, $content);
     $content = preg_replace('/(^|\s)@(\w*[a-zA-Z_]+\w*)/', $handle, $content);
     echo $content;
@@ -79,7 +81,7 @@ function tweet_content($item) {
 
 function tweet_date($item) {
     extract($item['type_vals']);
-    echo $item['type_vals']['date'];
+    echo format_date($date);
 }
 
 function tweet_author($item) {
