@@ -1,7 +1,7 @@
 <?php
 
 $qa_defaults = array(
-    'directory' => ABSPATH.'\qa\qa-include\qa-base.php',
+    'directory' => '\qa\qa-include\qa-base.php',
 );
 
 function qa_defaults() {
@@ -12,7 +12,7 @@ function get_qa_items ($atts) {
     
     extract($atts);
 
-    require_once($directory);
+    require_once(ABSPATH.$directory);
     $prefix = constant('QA_MYSQL_TABLE_PREFIX'); 
     $limit = $number_of_each;
     $query = qa_db_query_sub("

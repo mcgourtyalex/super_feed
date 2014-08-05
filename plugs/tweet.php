@@ -6,11 +6,15 @@ function get_tweet_items ($atts) {
     $users = explode(" ", $twitter);
     $tweets = [];
     foreach($users as $user) {
-        // fetch feed using WP
+        // fetch feed using twitrss
         $rss = fetch_feed('http://twitrss.me/twitter_user_to_rss/?user='.$user);
 
-        if (!is_wp_error($rss)) {
+        if (is_wp_error($rss)) {
+            // fetch feed using rssitfor.me
+            $rss = fetch_feed('http://www.rssitfor.me/getrss?name='.$user);
+        }
         
+        if (!is_wp_error($rss)) {
             // get items
             $rss_items = $rss->get_items(0, $number_of_each);
 
@@ -34,6 +38,7 @@ function get_tweet_items ($atts) {
                         'user' => $user, 
                         'date' => $date, 
                         'title' => $content,
+                        'content' => $content,
                         'link' => $link,
                         'tag' => $tag,
                         'id' => $id,
@@ -76,7 +81,6 @@ function tweet_title($item) {
 }
 
 function tweet_content($item) {
-
 }
 
 function tweet_date($item) {

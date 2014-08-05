@@ -12,8 +12,8 @@ $item_args = array(
         'type' => '',
         'element' => 'title',
         'src' => 'none',
-        'number_of_each' => 1,
-        'formatted' => 'no'
+        'item_number' => 1,
+        'formatted' => 'yes'
 );
 
 // GLOBAL ARRAY OF REGISTERED FEED NAMES

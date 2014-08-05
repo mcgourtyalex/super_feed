@@ -1,0 +1,129 @@
+body {
+    text-align: center;
+    font-family: Corbel, sans-serif;
+    color: #444444;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul, ol {
+    list-style-type: decimal;
+    line-height: 25px;
+}
+
+li {
+    margin: 0 20px 20px 0;
+}
+
+div {
+    display: inline-block;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.bg_img {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+.title {
+    font-size: 40px;
+    text-transform: capitalize;
+    height: 150px;
+    background: url(supermap.png);
+    opacity: 80%;
+    width: 100%;
+    line-height: 150px;
+    border-bottom: 1px solid #DDDDDD;
+
+}
+
+.header {
+    text-transform: capitalize;
+    font-size: 20px;
+    border-bottom: 1px solid #DDDDDD;
+    text-align: left;
+}
+
+.sub_header {
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 1px dashed #DDDDDD;
+    font-weight: bold;
+    width: 100%;
+}
+.bold {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6a00;
+}
+
+.column {
+    float: left;
+    width: 45%;
+    text-align: left;
+}
+
+.full {
+    float: left;
+    width: 95%;
+    text-align: left;
+}
+
+.content {
+    margin: 80px;
+    margin-top: 0px;
+    font-family: 
+}
+
+.content div {
+    margin: 10px;
+    padding: 5px;
+}
+
+.small_imgs {
+    border: 1px solid #DDDDDD;
+    margin: 5px;
+    max-width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+.big_imgs {
+    border: 1px solid #DDDDDD;
+    margin: 5px;
+    max-width: 450px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.bigger_imgs {
+    border: 1px solid #DDDDDD;
+    margin: 5px;
+    max-width: 600px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.one:before { content: "1";}
+.two:before { content: "2";}
+.three:before { content: "3";}
+.four:before { content: "4";}
+.five:before { content: "5";}
+.six:before { content: "6";}
+
+.img_wrap {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+span.tab{
+    padding-left: 80px;
+}

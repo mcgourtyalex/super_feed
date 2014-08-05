@@ -88,17 +88,27 @@ function recent_item_controller($atts) {
 
     // set the type equal to the source
     $atts[$type] = $src;
+    $atts['number_of_each'] = $item_number;
 
     // get a single item of the type
     $new_items = call_user_func('get_'.$type.'_items', $atts);
-    $item = $new_items[0];
+    $item = $new_items[$item_number - 1];
 
     // return the item formatted
-    if ($formatted == 'yes') {
-        return content_type($item, $element, $atts);
+
+    ob_start();
+
+    $response = content_type($item, $element, $atts);
+
+    $body = ob_get_contents();
+    ob_end_clean();
+
+    if ($formatted == 'yes' && $body) {
+        return $body;
     } else {
         return $item['type_vals'][$element];
     }
+
 }
 
 ?>

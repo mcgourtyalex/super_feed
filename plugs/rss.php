@@ -15,23 +15,26 @@ function get_rss_items ($atts) {
     $feeds = explode(" ", $rss);
     $vals = [];
     foreach ($feeds as $feed) {
-        
         $rss = fetch_feed($feed);
-        
         if (!is_wp_error($rss)) {
             $feed_title = $rss->get_title();
             $rss_items = $rss->get_items(0,$atts['number']);
             $i = 0;
         
             foreach($rss_items as $rss_item) {
-                
                 // vars
                 $title = $rss_item->get_title();
                 $link = $rss_item->get_link();
                 $date = $rss_item->get_date();
                 $date_key = strtotime($date);
-                $author = $rss_item->get_author()->get_name();
-                $author_link = $rss_item->get_author()->get_link();
+                $author_obj = $rss_item->get_author();
+                if ($author_obj) {
+                    $author = $author_obj->get_name();
+                    $author_link = $author_obj->get_link();
+                } else {
+                    $author = "";
+                    $author_link = "";
+                }
                 $category = $rss_item->get_category();
                 $content = $rss_item->get_description();
 

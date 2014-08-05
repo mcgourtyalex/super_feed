@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>EHP Feed Aggregator Shortcode</title>
+        <link rel="stylesheet" type="text/css" href="readme.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="title">
+                EHP Feed Aggregator Shortcode
+            </div>
+            <div class="content">
+
+            <div class="sub_header">
+                Features:
+            </div>
+            <div class="full">
+                <ul>
+                <li><span class="bold">Feed embedding: </span>integrate, sort, and display multiple feeds of different types or sources in the same place</li>
+                <li><span class="bold">Single item embedding: </span>embed the latest single title, link, content item, etc. anywhere</li>
+                <li><span class="bold">Customization: </span>customize the feed aggregator or individual feeds using shortcode attributes</li>
+                <li><span class="bold">Extendability: </span>quickly and easily add more feeds by extending the plugin</li>
+                </ul>
+            </div>
+            <div class="full">
+                Try it: <strong>[recent_feed rss="http://feeds.popsci.com/c/34567/f/632422/index.rss http://feeds.sciencedaily.com/sciencedaily.rss" tweet="neiltyson cmdr_hadfield" qa="on" atube="on" sort="shuffle" width="85%"]</strong>
+            </div>
+
+            <div class="sub_header">
+                Using the shortcode:
+            </div>
+            <div class="column">
+                <span class="bold"> [recent_feed] </span>
+                <ul>
+                The [recent_feed] shortcode will embed the aggregated feed using the following attributes:
+                <li>Activate a feed by setting the feed slug to its source or sources, separated by spaces, or 'on'; ex. tweet='autodesk kingjames' or atube='on'</li>
+                <li><strong>number_of_each:</strong> Sets the number of items to post from each source</li>
+                <li><strong>post_width:</strong> Sets the width of the post feed as a percentage or integer; ex. post_width="500" or post_width="80%"</li>
+                <li><strong>sort:</strong> Sets the sort style for the posts to 'date', 'shuffle', or alphabetical; ex. sort="shuffle"</li>
+                </ul>
+            </div>
+            <div class="column">
+                <span class="bold"> [recent_item] </span>
+                <ul>
+                The [recent_item] shortcode will embed the latest element in a feed:
+                <li><strong>type:</strong> Sets the feed type to get an item from; ex. type="tweet"</li>
+                <li><strong>element:</strong> Sets the element to retrieve from a feed item to 'icon', 'title', 'content', 'date', 'author', 'link' etc.; ex. element="title"</li>
+                <li><strong>src:</strong> Sets the source to retrieve the feed from; ex. type="tweet" src="autodesk"</li>
+                <li><strong>item_number:</strong> Sets the number of the item in the feed to retrieve; ex. item_number="3" gets the third feed item</li>
+                <li><strong>formatted:</strong> Setting to 'yes' indicates whether or not the item should be formatted</li>
+                </ul>
+            </div>
+
+            <div class="sub_header">
+                Feed attributes:
+            </div>
+            <div class="column">
+                <span class="bold"> atube="on" </span>
+                <ul>
+                The ATube feed integrates the latest Atube videos into the feed using the following attributes:
+                <li><strong>atube_width:</strong> Sets the width of the embedded videos as an integer; ex. atube_width="400" embeds a video of width 400px</li>
+                <li><strong>atube_height:</strong> Sets the height of the embedded videos as an integer</li>
+                </ul>
+            </div>
+            
+            <div class="column">
+                <span class="bold"> qa="on" </span>
+                <ul>
+                The qa feed integrates the latest questions asked in Question2Answer into the feed using the following attribute:
+                <li><strong>directory:</strong> Sets the directory of the Question2Answer qa-base.php file; ex. directory="\qa\qa-include\qa-base.php" (appends to ABSPATH)</li>
+                </ul>
+            </div>
+
+            <div class="sub_header">
+            </div>
+            <div class="column">
+                <span class="bold"> rss="..." </span>
+                <ul>
+                The RSS feed integrates an RSS feed into the feed using the following attributes:
+                <li><strong>chars:</strong> Sets the number of characters to limit RSS content to a number or 'full'; ex. chars="full" or chars="300"</li>
+                <li><strong>max_chars:</strong> Sets the maximum number of characters to expose more content; ex. max_chars="full" or max_chars="500"</li>
+                <li><strong>roll:</strong> Setting 'yes' activates rolling out more content on mouseover</li>
+                </ul>
+            </div>
+            <div class="column">
+                <span class="bold"> tweet="..." </span>
+                <ul>
+                The tweet feed integrates the latest twitter posts from listed users into the feed.
+                </ul>
+            </div>
+
+            <div class="sub_header">
+                Extension:
+            </div>
+            <div class="column">
+            <span class="bold"> funcs and vars </span><br /><br />
+                The feed code can be added to by copying TEMPLATE.php in /plugs/ and editing it to produce the desired content.<br/><br/>
+                Each feed should have a *[unique slug]* used to name each function and global variable in the file; ex. 'template'<br/>
+                The following functions are required for the feed to integrate properly:
+                <ol>
+                <li><strong>$</strong>*slug*<strong>_defaults:</strong> associative array of attribute names and default values</li>
+                <li>*slug*<strong>_defaults():</strong> returns the $*slug*_defaults</li>
+                <li><strong>get_</strong>*slug*<strong>_items():</strong> returns an array of item objects in the form specified below</li>
+                
+                </ol>
+            </div>
+            <div class="column">
+                <ol start="4">
+                    <li>*slug*<strong>_title():</strong> echoes a formatted title</li>
+                    <li>*slug*<strong>_icon():</strong> echoes a formatted icon</li>
+                    <li>*slug*<strong>_author_top():</strong> returns a boolean to indicate the position of the author name</li>
+                    <li>*slug*<strong>_content():</strong> echoes formatted content</li>
+                    <li>*slug*<strong>_date():</strong> echoes a formatted date</li>
+                    <li>*slug*<strong>_author():</strong> echoes a formatted author name</li>
+                </ol>
+            </div>
+
+            <div class="sub_header">
+            </div>
+            <div class="column">
+            <span class="bold"> items </span><br /><br />
+                Each item should contain, but is not limited to, the following format:<br/><br/>
+<code>
+<pre>function get_*slug*_items ($item, $atts) {
+    // create items to return
+    $items = [];
+    // add at least one item with this base format:
+<strong>
+    $items[0] = [
+        'type' => '*slug*', 
+        'date_key' => '', 
+        'type_vals' => [
+            'title' => '', 
+            'date' => '', 
+            'content' => '',
+            'link' => '',
+        ],
+    ];
+</strong>
+    // return the items
+    return $items;
+}
+</pre>
+</code>
+            </div>
+
+            <div class="column">
+            <span class="bold"> registering the feed </span><br /><br />
+                To register a custom feed for use, add the following to the_superplug.php:<br/><br/>
+
+                <code>
+                    <strong>register_defaults ('*slug*', 'none');</strong>
+                </code><br/><br/>
+
+                This will set the custom feed's default attribute to 'none'.
+                To use the custom feed, turn on the *slug* attribute, ex. [recent_feed ... *slug*="on" ...]
+            </div>
+
+            
+        </div>
+    </body>
+</html>

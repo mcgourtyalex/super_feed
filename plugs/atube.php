@@ -21,8 +21,8 @@ function get_atube_items ($atts) {
         foreach($items as $item) {
 
             $title = $item->getElementsByTagName('title')->item(0)->nodeValue;
-            $link = $item->getElementsByTagNameNS('*','content')->item(0)->getAttribute('url');
-            $href = $item->getElementsByTagName('link')->item(0)->nodeValue;
+            //$link = $item->getElementsByTagNameNS('*','content')->item(0)->getAttribute('url');
+            $link = $item->getElementsByTagName('link')->item(0)->nodeValue;
             $date = $item->getElementsByTagName('pubDate')->item(0)->nodeValue;
             $date_key = strtotime($date);
             $description = $item->getElementsByTagName('description')->item(0)->nodeValue;
@@ -33,9 +33,9 @@ function get_atube_items ($atts) {
                 'type_vals' => [
                     'title' => $title, 
                     'link' => $link, 
-                    'date' => $date, 
+                    'date' => $date,
+                    'content' => $link,
                     'description' => $description,
-                    'href' => $href,
                 ],
             ];
 
@@ -50,7 +50,7 @@ function get_atube_items ($atts) {
 
 function atube_title($item) {
     extract($item['type_vals']);
-    link_title($href, $title);
+    link_title($link, $title);
 }
 
 function atube_icon($item) {
@@ -74,13 +74,13 @@ function atube_author_top() {
     return TRUE;
 }
 
-function atube_content($item) {
+function atube_content($item, $atts) {
     extract($item['type_vals']);
-    extract(atube_defaults());
-    echo embedify($href, $atube_width, $atube_height);
+    extract($atts);
+    echo embedify($link, $atube_width, $atube_height);
     echo '<br />';
 
-    more_button($href);
+    more_button($link);
 }
 
 function atube_date($item) {
@@ -92,15 +92,15 @@ function atube_author($item) {
     extract($item['type_vals']);
     echo '<div class="hidden_button">';
     echo '<a href="';
-    echo $href;
+    echo $link;
     echo '">';
     echo "<button class='feed_button'>more</button>";
     echo '</a>';
     echo '</div>';
 }
 
-function embedify($href, $width, $height) {
-        $str = '<iframe src="'.$href.'/embed_player" style="width: ';
+function embedify($link, $width, $height) {
+        $str = '<iframe src="'.$link.'/embed_player" style="width: ';
         $str = $str.$width.'px; height:'; 
         $str = $str.$height.'px; border: 1px solid #BBBBBB;"></iframe>';
         return $str;
