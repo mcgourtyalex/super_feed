@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    font-family: Corbel, sans-serif;
+    font-family: Corbel, 'Trebuchet MS', sans-serif;
     color: #444444;
     margin: 0px;
     padding: 0px;
@@ -20,6 +20,8 @@ div {
     position: relative;
     margin: 0px;
     padding: 0px;
+    font-family: Corbel, 'Trebuchet MS', sans-serif;
+    color: #444444;
 }
 
 .wrapper {
@@ -38,12 +40,11 @@ div {
     font-size: 40px;
     text-transform: capitalize;
     height: 150px;
-    background: url(supermap.png);
     opacity: 80%;
     width: 100%;
     line-height: 150px;
     border-bottom: 1px solid #DDDDDD;
-
+    background: #EEF;
 }
 
 .header {

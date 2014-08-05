@@ -9,6 +9,8 @@ foreach (glob(dirname(__FILE__)."*/plugs/*.php") as $filename) {
     include $filename;
 }
 
+include 'info_page.php';
+
 // Feed defaults can be edited in defaults.php:
 require_once('defaults.php');
 
